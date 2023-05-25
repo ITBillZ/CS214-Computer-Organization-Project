@@ -37,7 +37,7 @@ module cpu (
     divider divider_show(
         .clk(fpga_clk),
         .rst(fpga_rst),
-        .frequency(1000),
+        .frequency(500),
         .clk_out(show_clk)
     );
 

@@ -13,7 +13,7 @@ module divider (
             cnt <= 0;
         end
 
-        else if (cnt == period - 1) begin
+        else if (cnt == (period >> 1) - 1) begin
             cnt <= 0;
             clk_out <= ~clk_out;
         end
