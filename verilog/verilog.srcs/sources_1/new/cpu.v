@@ -137,15 +137,15 @@ module cpu (
     wire [5:0] Function_opcode;
     wire [21:0] Alu_resultHigh;
     // output of control32
-    wire MemWrite;
     wire ALUSrc;
     wire I_format;
     wire Sftmd;
     wire[1:0] ALUOp;
     wire MemorIOtoReg;     // 1 indicates that data needs to be read from memory or I/O to the register
-    wire MemRead;          // 1 indicates that the instruction needs to read from the memory
-    wire IORead;           // 1 indicates I/O read
-    wire IOWrite;
+    wire [2:0] MemRead;          // 1 indicates that the instruction needs to read from the memory
+    wire [2:0] MemWrite;
+    wire [2:0] IORead;           // 1 indicates I/O read
+    wire [2:0] IOWrite;
 
     assign Opcode          = Instruction[31:26];
     assign Function_opcode = Instruction[5:0];
@@ -164,12 +164,12 @@ module cpu (
         .RegDST(RegDst),
         .MemtoReg(MemtoReg),
         .RegWrite(RegWrite),
-        .MemWrite(MemWrite),
         .ALUSrc(ALUSrc),
         .I_format(I_format),
         .Sftmd(Sftmd),
         .ALUOp(ALUOp),
         .MemorIOtoReg(MemorIOtoReg),
+        .MemWrite(MemWrite),
         .MemRead(MemRead),
         .IORead(IORead),
         .IOWrite(IOWrite)
@@ -205,7 +205,7 @@ module cpu (
     wire[31:0] read_data;
     dmem32_uart udmem(
            .ram_clk_i(cpu_clk), // from CPU top
-           .ram_wen_i(MemWrite), // from controller
+           .ram_wen_i((MemWrite != 3'b0) ? 1'b1 : 1'b0), // !from controller
            .ram_adr_i(addr_out[13:0]), // from alu_result of ALU
            .ram_dat_i(write_data), // from read_data_2 of decoder
            .ram_dat_o(read_data), // the data read from ram

@@ -5,10 +5,10 @@ module MemOrIO(
     addr_out, m_rdata, io_rdata, r_wdata, r_rdata, write_data, LEDCtrl, SwitchCtrl, KBCtrl
     );
 
-    input mRead; // read memory, from control32
-    input mWrite; // write memory, from control32
-    input ioRead; // read IO, from control32
-    input ioWrite; // write IO, from control32
+    input [2:0] mRead; // read memory, from control32
+    input [2:0] mWrite; // write memory, from control32
+    input [2:0] ioRead; // read IO, from control32
+    input [2:0] ioWrite; // write IO, from control32
     input[31:0] addr_in; // from alu_result in executs32
     
     input[31:0] m_rdata; // data read from memory
@@ -25,17 +25,21 @@ module MemOrIO(
 
     assign addr_out= addr_in;
     
-    assign r_wdata=(ioRead==1'b1)?io_rdata:m_rdata;           //miss this one !!!
+    wire io_write_en = (ioWrite != 3'b000) ? 1'b1 : 1'b0;
+    wire io_read_en = (ioRead != 3'b000) ? 1'b1 : 1'b0;
+    wire mem_write_en = (mWrite != 3'b000) ? 1'b1 : 1'b0;
+
+    assign r_wdata= io_read_en ? io_rdata:m_rdata;           //miss this one !!!
 
     // The data wirte to register file may be from memory or io. // While the data is from io, it should be the lower 16bit of r_wdata. assign r_wdata = ������
     // Chip select signal of Led and Switch are all active high;
-    assign LEDCtrl= (ioWrite == 1'b1)?1'b1:1'b0; // led 
-    assign SwitchCtrl= (ioRead == 1'b1)?1'b1:1'b0; //switch  
-    assign KBCtrl = (ioRead == 1'b1)?1'b1:1'b0;
+    assign LEDCtrl= io_write_en; // led 
+    assign SwitchCtrl= io_read_en; //switch  
+    assign KBCtrl = io_read_en;
     always @* begin
-        if((mWrite==1)||(ioWrite==1))
+        if(mem_write_en || io_write_en)
             //wirte_data could go to either memory or IO. where is it from?
-            write_data =  ((mWrite == 1'b1)?r_rdata:{16'b0000000000000000,r_rdata[15:0]});
+            write_data =  (mem_write_en ? r_rdata : {16'b0000000000000000,r_rdata[15:0]});
         else
             write_data = 32'hZZZZZZZZ;
     end

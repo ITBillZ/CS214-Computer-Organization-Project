@@ -9,7 +9,7 @@
 module leds(led_clk, ledrst, ledwrite, ledcs, ledaddr,ledwdata, ledout);
     input led_clk;    		    
     input ledrst; 		       
-    input ledwrite;		       
+    input [2:0] ledwrite;		       
     input ledcs;		      	
     input[1:0] ledaddr;	       
     input[15:0] ledwdata;	  	
@@ -22,12 +22,23 @@ module leds(led_clk, ledrst, ledwrite, ledcs, ledaddr,ledwdata, ledout);
             ledout <= 24'h000000;
         end
 		else if(ledcs && ledwrite) begin
-			if(ledaddr == 2'b00)
-				ledout[23:0] <= { ledout[23:16], ledwdata[15:0] };
-			else if(ledaddr == 2'b10 )
-				ledout[23:0] <= { ledwdata[7:0], ledout[15:0] };
-			else
-				ledout <= ledout;
+            if (ledwrite == 3'b100 || ledwrite == 3'b010) 
+                if(ledaddr == 2'b00)
+                    ledout[23:0] <= { ledout[23:16], ledwdata[15:0] };
+                else if(ledaddr == 2'b10 )
+                    ledout[23:0] <= { ledwdata[7:0], ledout[15:0] };
+                else
+                    ledout <= ledout;
+            
+            else if (ledwrite == 3'b001) 
+                if (ledaddr == 2'b00)
+                    ledout[23:0] <= { ledout[23:8], ledwdata[7:0] };
+                else if (ledaddr == 2'b01) 
+                    ledout[23:0] <= { ledout[23:16], ledwdata[7:0], ledout[8:0] };
+                else if (ledaddr == 2'b10) 
+                    ledout[23:0] <= { ledwdata[7:0], ledout[15:0] };
+                else 
+                    ledout <= ledout;
         end
 		else begin
             ledout <= ledout;

@@ -20,5 +20,5 @@ addition:
 
      # save right-16 swicth into right-16 led
     sw $2, 0xC60($28) 
-	
+
 	j addition
