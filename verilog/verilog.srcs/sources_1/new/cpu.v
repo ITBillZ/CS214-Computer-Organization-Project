@@ -285,10 +285,18 @@ module cpu (
         .seg_out(seg_out)
     );
     
-    // beep buzzer(
-    //      .clk(fpga_clk),
-    //      .en(~upg_wen_o),
-    //      .rst(rst),
-    //      .pwm(pwm)
-    // );
+//     beep buzzer(
+//          .clk(fpga_clk),
+//          .en(upg_wen_o),
+//          .rst(rst),
+//          .pwm(pwm)
+//     );
+    
+    music musicplayer(
+            .clk(fpga_clk),
+            .rst(rst),
+            
+            .beep(pwm)
+    );
+    
 endmodule

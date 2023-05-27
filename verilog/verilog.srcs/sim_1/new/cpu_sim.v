@@ -9,7 +9,7 @@ module cpu_sim(
     reg [23:0] switch;
     wire [23:0] led;
 
-    
+    defparam CPU.musicplayer.ctrl.period = 10;
     cpu CPU(
         .fpga_clk(fpga_clk),
         .fpga_rst(fpga_rst),
@@ -35,11 +35,6 @@ module cpu_sim(
             #10 fpga_rst = 0;
             #10 fpga_rst = 1;
             #10 fpga_rst = 0;
-            
-            #100 switch = 24'h00F000;
-            
-            #1000 switch = 24'h0000F0;
-            
             #2000 fpga_rst = 1;
         end
     end

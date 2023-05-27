@@ -27,7 +27,7 @@ input en,
 output reg pwm
     );
     reg [31:0]cnt;
-    parameter period = 400000;
+    parameter period = (10**8 / 260);
     always@(posedge clk,negedge rst)
     begin
     if(rst || en)

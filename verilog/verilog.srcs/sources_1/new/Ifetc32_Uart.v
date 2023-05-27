@@ -40,13 +40,11 @@ always @(*) begin
             Next_PC = Addr_result; // the calculated new value for PC 
         else if(Jr == 1)
             Next_PC = Read_data_1; // the value of $31 register
-        else if (Jal == 1 || Jmp == 1)
-            Next_PC = {PC[31:28], Instruction_i[25:0],2'b00};
         else 
             Next_PC = PC+32'd4; // PC+4
 end
 
-always @(negedge clock or posedge reset) begin
+always @(posedge clock or posedge reset) begin
     if(reset) begin
         PC <= 32'h0000_0000;
     end
