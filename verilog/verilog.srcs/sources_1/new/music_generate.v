@@ -9,7 +9,7 @@ output reg beep;
 reg [31:0] cnt;
 
 always @(posedge clk, negedge rst) begin
-    if(rst) begin
+    if(~rst) begin
         cnt <= 32'd0;
     end
     else if(cnt < pwm -1'b1) 
@@ -21,7 +21,7 @@ always @(posedge clk, negedge rst) begin
 end
 
 always @(posedge clk, negedge rst) begin
-    if(rst) 
+    if(~rst) 
         beep <= 1'b0;
     else
         if(cnt < pwm[31:1])

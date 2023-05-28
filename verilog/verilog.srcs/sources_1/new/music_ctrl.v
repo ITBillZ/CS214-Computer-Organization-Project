@@ -1,14 +1,15 @@
 `timescale 1ns / 1ps
 
-module music_ctrl(clk,rst,cnt);
+module music_ctrl(clk,rst,cnt, tot);
 input clk, rst;// rst active low
-output reg [5:0] cnt;
+input [6:0]tot;
+output reg [6:0] cnt;
 
-parameter period = 12500000; // every 1/8 second
+parameter period = 25000000; // every 1/4 second, period up,speed down
 reg        [25:0] count;
 wire                flag;
 always @(posedge clk, negedge rst) begin
-    if(rst)
+    if(~rst)
         count <= 26'b0;
     else begin
         if(count == period-1'b1) 
@@ -20,14 +21,20 @@ end
 
 assign flag = (count == period - 1'b1);
 always @(posedge clk, negedge rst) begin
-    if(rst)
-        cnt <= 6'b0;
+    if(~rst)
+        cnt <= 7'b0;
     else begin
+        if(cnt == tot - 1'b1) begin
+              cnt <= 7'b0;
+        end
+        else begin
         if(flag) 
             cnt <= cnt + 1'b1;
         else
             cnt <= cnt;
+        end
     end
-end   
+end
+
 
 endmodule

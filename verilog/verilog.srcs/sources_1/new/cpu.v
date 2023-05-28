@@ -3,6 +3,7 @@
 module cpu (
     input fpga_clk,
     input fpga_rst, // Active High
+    input music_play,
     input [3:0] row, 
     input [23:0] switch,
     output [23:0] led,
@@ -48,7 +49,7 @@ module cpu (
         if (fpga_rst)
             upg_rst = 1;
     end
-       
+  
     wire rst = fpga_rst | !upg_rst;
     
     uart_bmpg_0 uart(
@@ -149,6 +150,8 @@ module cpu (
     wire IORead;           // 1 indicates I/O read
     wire IOWrite;
 
+    wire MusicRead; 
+
     assign Opcode          = Instruction[31:26];
     assign Function_opcode = Instruction[5:0];
     assign Alu_resultHigh  = ALU_result[31:10];
@@ -174,7 +177,9 @@ module cpu (
         .MemorIOtoReg(MemorIOtoReg),
         .MemRead(MemRead),
         .IORead(IORead),
-        .IOWrite(IOWrite)
+        .IOWrite(IOWrite),
+
+        .MusicRead(MusicRead)
     );   
 
     wire [4:0] Shamt = Instruction[10:6];
@@ -229,12 +234,16 @@ module cpu (
     wire LEDCtrl; // LED Chip Select
     wire SwitchCtrl; // Switch Chip Select
     wire KBCtrl;  // Keyboard Chip Select
+    wire MusicCtrl;
 
     MemOrIO memio(
         .mRead(MemRead),    // read memory, from control32
         .mWrite(MemWrite),  // write memory, from control32
         .ioRead(IORead),    // read IO, from control32
         .ioWrite(IOWrite),  // write IO, from control32
+
+        .MusicRead(MusicRead),
+
         .addr_in(ALU_result),   //from alu
         .m_rdata(read_data),    //from memory
         .io_rdata(iodata),    //data read from hardware, switch or something
@@ -245,7 +254,8 @@ module cpu (
         .write_data(write_data),    //io_wdata, output
         .LEDCtrl(LEDCtrl),
         .SwitchCtrl(SwitchCtrl),
-        .KBCtrl(KBCtrl)
+        .KBCtrl(KBCtrl),
+        .MusicCtrl(MusicCtrl)
     );
 
     leds ledoutput(
@@ -291,10 +301,18 @@ module cpu (
 //          .rst(rst),
 //          .pwm(pwm)
 //     );
-    
+    reg music_en = 0;
+    always @(posedge fpga_clk) begin
+            if(fpga_rst) music_en <= 1'b0;
+            if(music_play) music_en <= 1'b1;
+     end
     music musicplayer(
             .clk(fpga_clk),
             .rst(rst),
+            
+            .en(music_en),
+            .musiccs(MusicCtrl),
+            .music_data(write_data),
             
             .beep(pwm)
     );

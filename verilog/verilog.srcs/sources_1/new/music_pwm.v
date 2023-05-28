@@ -38,7 +38,7 @@ always @* begin
 end
 
 always @ (posedge clk, negedge rst) begin
-    if(rst)
+    if(~rst)
         pwm <= 10**8;
     else 
         pwm <= (10**8) / frequncy;

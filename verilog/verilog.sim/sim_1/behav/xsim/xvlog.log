@@ -40,8 +40,8 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Computer Organization/Project/CS
 INFO: [VRFC 10-311] analyzing module music_ctrl
 INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Computer Organization/Project/CS214-Computer-Organization-Project/verilog/verilog.srcs/sources_1/new/music_generate.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module music_generate
-INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Computer Organization/Project/CS214-Computer-Organization-Project/verilog/verilog.srcs/sources_1/new/music_mem.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module music_mem
+INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Computer Organization/Project/CS214-Computer-Organization-Project/verilog/verilog.srcs/sources_1/new/music_mem_plus.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module music_mem_plus
 INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Computer Organization/Project/CS214-Computer-Organization-Project/verilog/verilog.srcs/sources_1/new/music_pwm.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module music_pwm
 INFO: [VRFC 10-2263] Analyzing Verilog file "F:/Computer Organization/Project/CS214-Computer-Organization-Project/verilog/verilog.srcs/sources_1/new/show.v" into library xil_defaultlib

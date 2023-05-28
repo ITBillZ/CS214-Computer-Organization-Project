@@ -21,7 +21,7 @@ verilog xil_defaultlib  --include "../../../../verilog.srcs/sources_1/ip/clkout_
 "../../../../verilog.srcs/sources_1/new/music.v" \
 "../../../../verilog.srcs/sources_1/new/music_ctrl.v" \
 "../../../../verilog.srcs/sources_1/new/music_generate.v" \
-"../../../../verilog.srcs/sources_1/new/music_mem.v" \
+"../../../../verilog.srcs/sources_1/new/music_mem_plus.v" \
 "../../../../verilog.srcs/sources_1/new/music_pwm.v" \
 "../../../../verilog.srcs/sources_1/new/show.v" \
 "../../../../verilog.srcs/sources_1/new/switchs.v" \

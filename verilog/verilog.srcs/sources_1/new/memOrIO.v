@@ -1,14 +1,17 @@
 `timescale 1ns / 1ps
 
 module MemOrIO(
-    mRead, mWrite, ioRead, ioWrite,addr_in,
-    addr_out, m_rdata, io_rdata, r_wdata, r_rdata, write_data, LEDCtrl, SwitchCtrl, KBCtrl
+    mRead, mWrite, ioRead, ioWrite,MusicRead,addr_in,
+    addr_out, m_rdata, io_rdata, r_wdata, r_rdata, write_data, LEDCtrl, SwitchCtrl, KBCtrl, MusicCtrl
     );
 
     input mRead; // read memory, from control32
     input mWrite; // write memory, from control32
     input ioRead; // read IO, from control32
     input ioWrite; // write IO, from control32
+
+    input MusicRead;
+
     input[31:0] addr_in; // from alu_result in executs32
     
     input[31:0] m_rdata; // data read from memory
@@ -23,6 +26,8 @@ module MemOrIO(
     output SwitchCtrl; // Switch Chip Select
     output KBCtrl; // keyboard
 
+    output MusicCtrl;
+
     assign addr_out= addr_in;
     
     assign r_wdata=(ioRead==1'b1)?io_rdata:m_rdata;           //miss this one !!!
@@ -32,10 +37,12 @@ module MemOrIO(
     assign LEDCtrl= (ioWrite == 1'b1)?1'b1:1'b0; // led 
     assign SwitchCtrl= (ioRead == 1'b1)?1'b1:1'b0; //switch  
     assign KBCtrl = (ioRead == 1'b1)?1'b1:1'b0;
+    assign MusicCtrl = (MusicRead == 1'b1)? 1'b1:1'b0;
+
     always @* begin
-        if((mWrite==1)||(ioWrite==1))
+        if((mWrite==1)||(ioWrite==1) || (MusicRead==1))
             //wirte_data could go to either memory or IO. where is it from?
-            write_data =  ((mWrite == 1'b1)?r_rdata:{16'b0000000000000000,r_rdata[15:0]});
+            write_data =  ((mWrite == 1'b1 || MusicRead == 1'b1)?r_rdata:{16'b0000000000000000,r_rdata[15:0]});
         else
             write_data = 32'hZZZZZZZZ;
     end

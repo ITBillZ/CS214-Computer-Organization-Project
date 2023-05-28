@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="990020000fs"></ZoomStartTime>
-      <ZoomEndTime time="1002000001fs"></ZoomEndTime>
-      <Cursor1Time time="999460000fs"></Cursor1Time>
+      <ZoomStartTime time="3946580000fs"></ZoomStartTime>
+      <ZoomEndTime time="4073180001fs"></ZoomEndTime>
+      <Cursor1Time time="9130000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="175"></NameColumnWidth>
-      <ValueColumnWidth column_width="74"></ValueColumnWidth>
+      <NameColumnWidth column_width="143"></NameColumnWidth>
+      <ValueColumnWidth column_width="72"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="11" />
+   <WVObjectSize size="18" />
    <wvobject fp_name="/cpu_sim/fpga_clk" type="logic">
       <obj_property name="ElementShortName">fpga_clk</obj_property>
       <obj_property name="ObjectShortName">fpga_clk</obj_property>
@@ -32,26 +32,53 @@
       <obj_property name="ElementShortName">fpga_rst</obj_property>
       <obj_property name="ObjectShortName">fpga_rst</obj_property>
    </wvobject>
-   <wvobject fp_name="/cpu_sim/CPU/musicplayer/beep" type="logic">
-      <obj_property name="ElementShortName">beep</obj_property>
-      <obj_property name="ObjectShortName">beep</obj_property>
+   <wvobject fp_name="/cpu_sim/CPU/musicplayer/mem_plus/rst" type="logic">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
    </wvobject>
-   <wvobject fp_name="/cpu_sim/CPU/musicplayer/cnt" type="array">
-      <obj_property name="ElementShortName">cnt[5:0]</obj_property>
-      <obj_property name="ObjectShortName">cnt[5:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
+   <wvobject fp_name="/cpu_sim/CPU/musicplayer/musiccs" type="logic">
+      <obj_property name="ElementShortName">musiccs</obj_property>
+      <obj_property name="ObjectShortName">musiccs</obj_property>
    </wvobject>
-   <wvobject fp_name="/cpu_sim/CPU/musicplayer/mem/clk" type="logic">
-      <obj_property name="ElementShortName">clk</obj_property>
-      <obj_property name="ObjectShortName">clk</obj_property>
+   <wvobject fp_name="/cpu_sim/music_play" type="logic">
+      <obj_property name="ElementShortName">music_play</obj_property>
+      <obj_property name="ObjectShortName">music_play</obj_property>
    </wvobject>
-   <wvobject fp_name="/cpu_sim/CPU/musicplayer/mem/music" type="array">
-      <obj_property name="ElementShortName">music[4:0]</obj_property>
-      <obj_property name="ObjectShortName">music[4:0]</obj_property>
+   <wvobject fp_name="/cpu_sim/CPU/music_en" type="logic">
+      <obj_property name="ElementShortName">music_en</obj_property>
+      <obj_property name="ObjectShortName">music_en</obj_property>
    </wvobject>
-   <wvobject fp_name="/cpu_sim/CPU/musicplayer/pwm/pwm" type="array">
-      <obj_property name="ElementShortName">pwm[31:0]</obj_property>
-      <obj_property name="ObjectShortName">pwm[31:0]</obj_property>
+   <wvobject fp_name="/cpu_sim/CPU/musicplayer/mem_plus/music_score[6]" type="array">
+      <obj_property name="ElementShortName">[6][4:0]</obj_property>
+      <obj_property name="ObjectShortName">[6][4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_sim/CPU/musicplayer/mem_plus/music_score[5]" type="array">
+      <obj_property name="ElementShortName">[5][4:0]</obj_property>
+      <obj_property name="ObjectShortName">[5][4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_sim/CPU/musicplayer/mem_plus/music_score[4]" type="array">
+      <obj_property name="ElementShortName">[4][4:0]</obj_property>
+      <obj_property name="ObjectShortName">[4][4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_sim/CPU/musicplayer/mem_plus/music_score[3]" type="array">
+      <obj_property name="ElementShortName">[3][4:0]</obj_property>
+      <obj_property name="ObjectShortName">[3][4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_sim/CPU/musicplayer/mem_plus/music_score[2]" type="array">
+      <obj_property name="ElementShortName">[2][4:0]</obj_property>
+      <obj_property name="ObjectShortName">[2][4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_sim/CPU/musicplayer/mem_plus/music_score[1]" type="array">
+      <obj_property name="ElementShortName">[1][4:0]</obj_property>
+      <obj_property name="ObjectShortName">[1][4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_sim/CPU/musicplayer/mem_plus/music_score[0]" type="array">
+      <obj_property name="ElementShortName">[0][4:0]</obj_property>
+      <obj_property name="ObjectShortName">[0][4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_sim/CPU/musicplayer/div" type="array">
+      <obj_property name="ElementShortName">div[31:0]</obj_property>
+      <obj_property name="ObjectShortName">div[31:0]</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/cpu_sim/CPU/musicplayer/pwm/frequncy" type="array">
@@ -59,13 +86,13 @@
       <obj_property name="ObjectShortName">frequncy[31:0]</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/cpu_sim/CPU/musicplayer/flow/beep" type="logic">
+   <wvobject fp_name="/cpu_sim/CPU/musicplayer/ctrl/cnt" type="array">
+      <obj_property name="ElementShortName">cnt[6:0]</obj_property>
+      <obj_property name="ObjectShortName">cnt[6:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_sim/CPU/musicplayer/beep" type="logic">
       <obj_property name="ElementShortName">beep</obj_property>
       <obj_property name="ObjectShortName">beep</obj_property>
-   </wvobject>
-   <wvobject fp_name="/cpu_sim/CPU/musicplayer/flow/cnt" type="array">
-      <obj_property name="ElementShortName">cnt[31:0]</obj_property>
-      <obj_property name="ObjectShortName">cnt[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
 </wave_config>
